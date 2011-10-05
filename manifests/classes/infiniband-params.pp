@@ -75,6 +75,50 @@ class infiniband::params {
                     ]
     }
 
+    # This part is dedicated to subnet manager (sm) for Infiniband
+    $sm_packagename = $::operatingsystem ? {
+        default => 'opensm'
+    }
+
+    $sm_utilspackages = $::operatingsystem ? {
+        default => [ 'opensm-doc' ]
+    }
+
+    $sm_servicename = $::operatingsystem ? {
+        default  => 'opensm'
+    }
+
+    $sm_processname = $::operatingsystem ? {
+        default  => 'opensm'
+    }
+
+    $hasstatus = $::operatingsystem ? {
+        /(?i-mx:ubuntu|debian)/        => false,
+        /(?i-mx:centos|fedora|redhat)/ => true,
+        default => true,
+    }
+
+    $hasrestart = $::operatingsystem ? {
+        default => true,
+    }
+
+    $sm_configfile = $::operatingsystem ? {
+        default => '/etc/opensm/opensm.conf',
+    }
+
+    $sm_configfile_mode = $::operatingsystem ? {
+        default => '0640',
+    }
+
+    $sm_configfile_owner = $::operatingsystem ? {
+        default => 'root',
+    }
+
+    $sm_configfile_group = $::operatingsystem ? {
+        default => 'root',
+    }
+
+
 
     # $pkgmanager = $::operatingsystem ? {
     #     /(?i-mx:ubuntu|debian)/          => [ '/usr/bin/apt-get' ],
