@@ -75,6 +75,13 @@ class infiniband::subnetmanager::common {
     package { $infiniband::params::sm_utilspackages:
         ensure => "${infiniband::ensure}"
     }
+
+    exec { "create ${infiniband::params::sm_configfile}":
+        command     => "opensm --create-config ${infiniband::params::sm_configfile}",
+        path        => "/usr/bin:/usr/sbin:/bin",
+        require     => Package['opensm'],
+        unless      => "test -f ${infiniband::params::sm_configfile}",
+    }
     
     file { "${infiniband::params::sm_configfile}":
         owner   => "${infiniband::params::sm_configfile_owner}",
@@ -83,7 +90,7 @@ class infiniband::subnetmanager::common {
         ensure  => "${infiniband::ensure}",
         #content => template("xen/xenconf.erb"),
         notify  => Service['opensm'],
-        require => Package['opensm'],
+        require => Exec["create ${infiniband::params::sm_configfile}"]
     }
 
     service { 'opensm':
@@ -94,7 +101,7 @@ class infiniband::subnetmanager::common {
         pattern    => "${infiniband::params::sm_processname}",
         hasstatus  => "${infiniband::params::hasstatus}",
         require    => Package['opensm'],
-        subscribe  => File["${infiniband::params::sm_configfile}"],
+        #subscribe  => File["${infiniband::params::sm_configfile}"],
     }
 
 
