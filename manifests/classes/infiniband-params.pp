@@ -85,7 +85,7 @@ class infiniband::params {
     }
 
     $sm_servicename = $::operatingsystem ? {
-        default  => 'opensm'
+        default  => 'opensm-boot'
     }
 
     $sm_processname = $::operatingsystem ? {
