@@ -79,6 +79,23 @@ class infiniband::common {
     class { 'infiniband::modules':
         stage => 'infiniband_last'
     }
+
+    # Add the rc.local file such that the hostname are currectly displayed when
+    # the IB commands are used (such as ibhosts which list the IB cards)
+    $rc_local_source = $infiniband::ensure ? {
+        'present' => 'rc.local',
+        default   => 'rc.local.default',        
+    }
+    
+    file { '/etc/rc.local':
+        ensure =>  "${infiniband::ensure}",
+        owner  => 'root',
+        group  => 'root',
+        mode   => '0755',
+        source => "puppet:///modules/infiniband/${rc_local_source}"        
+    }
+
+    
 }
 
 # ------------------------------------------------------------------------------
