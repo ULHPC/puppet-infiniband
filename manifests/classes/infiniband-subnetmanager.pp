@@ -77,7 +77,7 @@ class infiniband::subnetmanager::common {
     }
 
     exec { "create ${infiniband::params::sm_configfile}":
-        command     => "opensm --create-config ${infiniband::params::sm_configfile}",
+        command     => "opensm --routing_engine ftree --create-config ${infiniband::params::sm_configfile} l",
         path        => "/usr/bin:/usr/sbin:/bin",
         require     => Package['opensm'],
         unless      => "test -f ${infiniband::params::sm_configfile}",
@@ -88,7 +88,6 @@ class infiniband::subnetmanager::common {
         group   => "${infiniband::params::sm_configfile_group}",
         mode    => "${infiniband::params::sm_configfile_mode}",
         ensure  => "${infiniband::ensure}",
-        #content => template("xen/xenconf.erb"),
         notify  => Service['opensm'],
         require => Exec["create ${infiniband::params::sm_configfile}"]
     }
