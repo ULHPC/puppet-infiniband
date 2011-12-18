@@ -1,3 +1,5 @@
+
+### Infiniband specific part ###
 # Add node description to sysfs
 IBSYSDIR="/sys/class/infiniband"
 if [ -d ${IBSYSDIR} ]; then
@@ -10,4 +12,5 @@ if [ -d ${IBSYSDIR} ]; then
 fi
 
 chmod 666 /dev/infiniband/*
+
 

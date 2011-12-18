@@ -84,7 +84,8 @@ class infiniband::common {
     # the IB commands are used (such as ibhosts which list the IB cards)
     update::rc_local { 'infiniband': 
         ensure => "${infiniband::ensure}",
-        source => "puppet:///modules/infiniband/rc.local.infiniband" 
+        source => "puppet:///modules/infiniband/rc.local.infiniband",
+        order  => 50
     }
 
     
