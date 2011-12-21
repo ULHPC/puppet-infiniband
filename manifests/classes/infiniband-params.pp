@@ -39,41 +39,56 @@ class infiniband::params {
     # (Modify to adapt to unsupported OSes)
     #######################################
     $packagelist = $::operatingsystem ? {
-        default => [
-                    'libdapl-dev',
-                    'libdapl2',
-                    'ibutils',
-                    'infiniband-diags',
-                    'libibcommon-dev',
-                    'libibcommon1',
-                    'libibmad1',
-                    'libibmad-dev',
-                    'libibumad1',
-                    'libibumad-dev',
-                    'ibverbs-utils',
-                    'libibverbs-dev',
-                    'libibverbs1',
-                    'libmlx4-1',
-                    'libmlx4-dev',
-                    'librdmacm-dev',
-                    'librdmacm1',
-                    'rdmacm-utils',
-                    'libsdp1',
-                    'ofed-docs',
-                    'libopensm2',
-                    ]
+        /(?i-mx:ubuntu|debian)/ => [
+                                    'libdapl-dev',
+                                    'libdapl2',
+                                    'ibutils',
+                                    'infiniband-diags',
+                                    'libibcommon-dev',
+                                    'libibcommon1',
+                                    'libibmad1',
+                                    'libibmad-dev',
+                                    'libibumad1',
+                                    'libibumad-dev',
+                                    'ibverbs-utils',
+                                    'libibverbs-dev',
+                                    'libibverbs1',
+                                    'libmlx4-1',
+                                    'libmlx4-dev',
+                                    'librdmacm-dev',
+                                    'librdmacm1',
+                                    'rdmacm-utils',
+                                    'libsdp1',
+                                    'ofed-docs',
+                                    'libopensm2',
+                                    ],
+        default => []
+    }
+    $grouppackagename = $::operatingsystem ? {
+        /(?i-mx:centos|fedora|redhat)/ => "OpenFabrics Enterprise Distribution",
+        default => ''
     }
 
     $modulelist = $::operatingsystem ? {
-        default => [
-                    'mlx4_ib',
-                    'ib_ipoib',
-                    'ib_uverbs',
-                    'ib_umad',
-                    'rdma_cm',
-                    'rdma_ucm',
-                    ]
+        /(?i-mx:ubuntu|debian)/ => [
+                                    'mlx4_ib',
+                                    'ib_ipoib',
+                                    'ib_uverbs',
+                                    'ib_umad',
+                                    'rdma_cm',
+                                    'rdma_ucm',
+                                    ],
+        default => []
     }
+
+    # This part is used only on CentOS
+    $openib_servicename = $::operatingsystem ? {
+        default  => 'openibd'
+    }
+    $openib_processname = $::operatingsystem ? {
+        default  => 'openibd'
+    }
+    
 
     # This part is dedicated to subnet manager (sm) for Infiniband
     $sm_packagename = $::operatingsystem ? {
@@ -87,7 +102,6 @@ class infiniband::params {
     $sm_servicename = $::operatingsystem ? {
         default  => 'opensm-boot'
     }
-
     $sm_processname = $::operatingsystem ? {
         default  => 'opensm'
     }

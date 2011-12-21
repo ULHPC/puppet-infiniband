@@ -67,28 +67,15 @@ class infiniband::common {
     # Load the variables used in this module. Check the infiniband-params.pp file
     require infiniband::params
 
-    # install the required packages
-    package { $infiniband::params::packagelist :
-        ensure  => "${infiniband::ensure}",
-    }
-
     ### Add (or remove) the modules at the end (create a stage to be run at the
-    ### end for this purpose)  
-    stage { 'infiniband_last':  require => Stage['main'] }
-    #stage { 'sysadmin_first': before  => Stage['main'] }
-    class { 'infiniband::modules':
-        stage => 'infiniband_last'
-    }
+    ### end for this purpose)
+stage { 'infiniband_last':  require => Stage['main'] }
+#stage { 'sysadmin_first': before  => Stage['main'] }
+class { 'infiniband::modules':
+    stage => 'infiniband_last'
+}
 
-    # Add the rc.local file such that the hostname are currectly displayed when
-    # the IB commands are used (such as ibhosts which list the IB cards)
-    update::rc_local { 'infiniband': 
-        ensure => "${infiniband::ensure}",
-        source => "puppet:///modules/infiniband/rc.local.infiniband",
-        order  => 50
-    }
 
-    
 }
 
 # ------------------------------------------------------------------------------
@@ -104,7 +91,7 @@ class infiniband::modules {
 
     # install the modules
     kernel::module { $infiniband::params::modulelist :
-       ensure  => "${infiniband::ensure}", 
+        ensure  => "${infiniband::ensure}",
     }
 }
 
@@ -112,7 +99,23 @@ class infiniband::modules {
 # = Class: infiniband::debian
 #
 # Specialization class for Debian systems
-class infiniband::debian inherits infiniband::common { }
+class infiniband::debian inherits infiniband::common {
+
+    # install the required packages
+    package { $infiniband::params::packagelist :
+        ensure  => "${infiniband::ensure}",
+    }
+
+    # Bad packaging under Debian ;) 
+    # Add the rc.local file such that the hostname are currectly displayed when
+    # the IB commands are used (such as ibhosts which list the IB cards)
+    update::rc_local { 'infiniband':
+        ensure => "${infiniband::ensure}",
+        source => "puppet:///modules/infiniband/rc.local.infiniband",
+        order  => 50
+    }
+
+}
 
 # ------------------------------------------------------------------------------
 # = Class: infiniband::redhat
@@ -120,75 +123,27 @@ class infiniband::debian inherits infiniband::common { }
 # Specialization class for Redhat systems
 class infiniband::redhat inherits infiniband::common {
 
-  # THE COMMANDS OPERATED ON COLUMBUS 
+    # install the required packages
+    exec { "Install IB packages":
+        command => "yum -y groupinstall '${infiniband::params::grouppackagename}'",
+        path    => '/sbin:/usr/bin:/usr/sbin:/bin',
+        user    => 'root',
+        group   => 'root'
+    }
 
-  #  79  modprobe ipmi_si
-  #  80  modprobe ipmi_devintf
-  #  81  yum search dstat
-  #  82  ifconfig 
-  #  83  ifconfig -a
-  #  84  dmesg 
-  #  85  selinuxenabled 
-  #  86  echo $?
-  #  87  yum install screen
-  #  88  screen
-  #  89  cd
-  #  90  screen -x
-  #  91  screen -
-  #  92  modprobe ipmi_si
-  #  93  modprobe ipmi_devintf
-  #  94  yum search ipmitool
-  #  95  yum install OpenIPMI-tools.x86_64
-  #  96  ipmitool lan print
-  #  97  ifconfig -a
-  #  98  dmesg |grep eth2
-  #  99  ethtool eth2
-  # 100  lspci 
-  # 101  lspci |grep Myr
-  # 102  yum grouplist
-  # 103  yum groupinstall "OpenFabrics Enterprise Distribution"
-  # 104  /etc/init.d/iptables stop
-  # 105  /etc/init.d/iptables save
-  # 106  cat /etc/sysconfig/iptables
-  # 107  chkconfig iptables off
-  # 108  chkconfig --list | grep ipta
-  # 109  vim /etc/sysconfig/selinux 
-  # 110  ibstat
-  # 111  chkconfig --list|grep -i openi
-  # 112  chkconfig openibd on
-  # 113  chkconfig --list|grep -i openi
-  # 114  /etc/init.d/openibd start
-  # 115  ifconfig 
-  # 116  ibstat
-  # 117  ibstat
-  # 118  ibstat
-  # 119  ibstat
-  # 120  ibstat
-  # 121  ibstat
-  # 122  ibstat
-  # 123  ibstat
-  # 124  ibstat
-  # 125  ibstat
-  # 126  ibstat
-  # 127  ibstat
-  # 128  ibstat
-  # 129  ibstat
-  # 130  ibstat
-  # 131  ifconfig 
-  # 132  ifconfig -a
-  # 133  cd /etc/sysconfig/network-scripts/
-  # 134  vim ifcfg-ib0 ifcfg-eth0 -o
-  # 135  ifup ib0
-  # 136  ifconfig 
-  # 137  ifconfig 
-  # 138  vim ifcfg-ib0 
-  # 139  ifdown ib0
-  # 140  ifup ib0
-  # 141  ifconfig 
-  # 142  ping 10.228.250.3
-  # 143  Il faut rebooter le noeuds ;)
-  # 144  screen
-  # 145  screen -x
+    service { 'openibd':
+        name       => "${infiniband::params::openib_servicename}",
+        enable     => true,
+        ensure     => running,
+        hasrestart => "${infiniband::params::hasrestart}",
+        pattern    => "${infiniband::params::openib_processname}",
+        hasstatus  => "${infiniband::params::hasstatus}",
+        require    => Exec["Install IB packages"],
+        #subscribe  => File["${infiniband::params::sm_configfile}"],
+    }
+
+
+    # THE COMMANDS OPERATED ON COLUMBUS
 
 }
 
