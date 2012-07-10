@@ -106,6 +106,11 @@ class infiniband::debian inherits infiniband::common {
         ensure  => "${infiniband::ensure}",
     }
 
+    package { $infiniband::params::extra_packages :
+        ensure  => "${infiniband::ensure}",
+    }
+  
+    
     # Bad packaging under Debian ;) 
     # Add the rc.local file such that the hostname are currectly displayed when
     # the IB commands are used (such as ibhosts which list the IB cards)
@@ -123,7 +128,7 @@ class infiniband::debian inherits infiniband::common {
 # Specialization class for Redhat systems
 class infiniband::redhat inherits infiniband::common {
 
-    # install the required packages
+       # install the required packages
     exec { "Install IB packages":
         command => "yum -y groupinstall '${infiniband::params::grouppackagename}'",
         path    => '/sbin:/usr/bin:/usr/sbin:/bin',
@@ -131,6 +136,12 @@ class infiniband::redhat inherits infiniband::common {
         group   => 'root'
     }
 
+    # install the extra packages
+    package { $infiniband::params::extra_packages :
+        ensure  => "${infiniband::ensure}",
+        require => Exec["Install IB packages"],
+    }
+    
     service { 'openibd':
         name       => "${infiniband::params::openib_servicename}",
         enable     => true,
