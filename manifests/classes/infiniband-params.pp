@@ -11,6 +11,8 @@
 # This class should be included, where necessary, and eventually be enhanced
 # with support for more OS
 #
+# Resources: http://publib.boulder.ibm.com/infocenter/lnxinfo/v3r0m0/index.jsp?topic=%2Fperformance%2Fhowtos%2Frecoveribv.htm
+#
 # == Warnings
 #
 # /!\ Always respect the style guide available
@@ -43,7 +45,6 @@ class infiniband::params {
                                     'libdapl-dev',
                                     'libdapl2',
                                     'ibutils',
-                                    'infiniband-diags',
                                     'libibcommon-dev',
                                     'libibcommon1',
                                     'libibmad1',
@@ -65,10 +66,13 @@ class infiniband::params {
         default => []
     }
     $grouppackagename = $::operatingsystem ? {
-        /(?i-mx:centos|fedora|redhat)/ => "OpenFabrics Enterprise Distribution",
+        /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
+            '5'     => "OpenFabrics Enterprise Distribution",
+            default => "Infiniband Support"
+        }, 
         default => ''
     }
-
+    
     $modulelist = $::operatingsystem ? {
         /(?i-mx:ubuntu|debian)/ => [
                                     'mlx4_ib',
@@ -81,11 +85,25 @@ class infiniband::params {
         default => []
     }
 
+    $extra_packages = $::operatingsystem ? {
+        /(?i-mx:centos|fedora|redhat)/ => [ 'infiniband-diags', 'perftest', 'mstflint' ],
+        default => [ 'infiniband-diags' ]
+    }
+    
+
     # This part is used only on CentOS
     $openib_servicename = $::operatingsystem ? {
+        /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
+            '5'     => 'openib',
+            default => 'rdma',
+        },
         default  => 'openibd'
     }
     $openib_processname = $::operatingsystem ? {
+        /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
+            '5'     => 'openib',
+            default => 'rdma',
+        },
         default  => 'openibd'
     }
     
@@ -100,7 +118,8 @@ class infiniband::params {
     }
 
     $sm_servicename = $::operatingsystem ? {
-        default  => 'opensm-boot'
+        /(?i-mx:ubuntu|debian)/ => 'opensm-boot',
+        default                 => 'opensm'
     }
     $sm_processname = $::operatingsystem ? {
         default  => 'opensm'
@@ -117,7 +136,8 @@ class infiniband::params {
     }
 
     $sm_configfile = $::operatingsystem ? {
-        default => '/etc/opensm/opensm.conf',
+        /(?i-mx:ubuntu|debian)/ => '/etc/opensm/opensm.conf',
+        default                 => "/etc/${$openib_servicename}/opensm.conf",
     }
 
     $sm_configfile_mode = $::operatingsystem ? {
