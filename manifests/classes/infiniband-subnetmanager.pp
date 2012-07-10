@@ -11,6 +11,11 @@
 # == Parameters:
 #
 # $ensure:: *Default*: 'present'. Ensure the presence (or absence) of infiniband::subnetmanager
+# $routing_engine:: *Default*: 'ftree'. This option chooses routing engine(s) to
+#      use instead of Min Hop algorithm (default).  Multiple routing engines can be
+#      specified separated by commas so that specific ordering of routing algorithms
+#      will be tried if earlier routing engines fail.
+#      Supported engines: minhop, updn, file, ftree, lash, dor 
 #
 # == Actions:
 #
@@ -38,7 +43,12 @@
 #
 # [Remember: No empty lines between comments and class definition]
 #
-class infiniband::subnetmanager ( $ensure = $infiniband::params::ensure ) inherits infiniband::params {
+class infiniband::subnetmanager (
+    $ensure         = $infiniband::params::ensure,
+    $routing_engine = 'ftree' 
+)
+inherits infiniband::params
+{
 
     info ("Configuring infiniband::subnetmanager (with ensure = ${ensure})")
 
@@ -48,7 +58,7 @@ class infiniband::subnetmanager ( $ensure = $infiniband::params::ensure ) inheri
 
     case $::operatingsystem {
         debian, ubuntu:         { include infiniband::subnetmanager::debian }
-        #redhat, fedora, centos: { include infiniband::subnetmanager::redhat }
+        redhat, fedora, centos: { include infiniband::subnetmanager::redhat }
         default: {
             fail("Module $module_name is not supported on $operatingsystem")
         }
@@ -72,12 +82,8 @@ class infiniband::subnetmanager::common {
         ensure => "${infiniband::ensure}"
     }
 
-    package { $infiniband::params::sm_utilspackages:
-        ensure => "${infiniband::ensure}"
-    }
-
     exec { "create ${infiniband::params::sm_configfile}":
-        command     => "opensm --routing_engine ftree --create-config ${infiniband::params::sm_configfile} l",
+        command     => "opensm --routing_engine ${infiniband::subnetmanager::routing_engine} --create-config ${infiniband::params::sm_configfile} l",
         path        => "/usr/bin:/usr/sbin:/bin",
         require     => Package['opensm'],
         unless      => "test -f ${infiniband::params::sm_configfile}",
@@ -111,7 +117,13 @@ class infiniband::subnetmanager::common {
 # = Class: infiniband::subnetmanager::debian
 #
 # Specialization class for Debian systems
-class infiniband::subnetmanager::debian inherits infiniband::subnetmanager::common { }
+class infiniband::subnetmanager::debian inherits infiniband::subnetmanager::common {
+
+    package { $infiniband::params::sm_utilspackages:
+        ensure => "${infiniband::ensure}"
+    }
+
+}
 
 # ------------------------------------------------------------------------------
 # = Class: infiniband::subnetmanager::redhat
