@@ -94,7 +94,7 @@ class infiniband::params {
     # This part is used only on CentOS
     $openib_servicename = $::operatingsystem ? {
         /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
-            '5'     => 'openib',
+            '5'     => 'openibd',
             default => 'rdma',
         },
         default  => 'openibd'
