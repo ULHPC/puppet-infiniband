@@ -69,10 +69,10 @@ class infiniband::params {
         /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
             '5'     => "OpenFabrics Enterprise Distribution",
             default => "Infiniband Support"
-        }, 
+        },
         default => ''
     }
-    
+
     $modulelist = $::operatingsystem ? {
         /(?i-mx:ubuntu|debian)/ => [
                                     'mlx4_ib',
@@ -86,10 +86,13 @@ class infiniband::params {
     }
 
     $extra_packages = $::operatingsystem ? {
-        /(?i-mx:centos|fedora|redhat)/ => [ 'infiniband-diags', 'perftest', 'mstflint' ],
+        /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
+            '5'     => [ 'infiniband-diags', 'perftest', ],
+            default => [ 'infiniband-diags', 'perftest', 'mstflint' ],
+        },
         default => [ 'infiniband-diags' ]
     }
-    
+
 
     # This part is used only on CentOS
     $openib_servicename = $::operatingsystem ? {
@@ -106,7 +109,7 @@ class infiniband::params {
         },
         default  => 'openibd'
     }
-    
+
 
     # This part is dedicated to subnet manager (sm) for Infiniband
     $sm_packagename = $::operatingsystem ? {
