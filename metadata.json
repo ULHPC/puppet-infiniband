@@ -26,5 +26,22 @@
       ]
     }
   ],
-  "tags": ["infiniband"]
+  "tags": [
+    "infiniband"
+  ],
+  "classes": [
+    "infiniband",
+    "infiniband::common",
+    "infiniband::common::debian",
+    "infiniband::common::redhat",
+    "infiniband::modules",
+    "infiniband::params",
+    "infiniband::subnetmanager",
+    "infiniband::subnetmanager::common",
+    "infiniband::subnetmanager::debian",
+    "infiniband::subnetmanager::redhat"
+  ],
+  "definitions": [
+
+  ]
 }
