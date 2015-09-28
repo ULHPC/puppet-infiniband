@@ -15,12 +15,25 @@
 
 include 'infiniband::params'
 
-$names = ['ensure', 'protocol', 'port', 'packagename']
+$names = ["ensure", "packagelist", "grouppackagename", "modulelist", "extra_packages", "openib_servicename", "openib_processname", "sm_packagename", "sm_utilspackages", "sm_servicename", "sm_processname", "hasstatus", "hasrestart", "sm_configfile", "sm_configfile_mode", "sm_configfile_owner", "sm_configfile_group"]
 
 notice("infiniband::params::ensure = ${infiniband::params::ensure}")
-notice("infiniband::params::protocol = ${infiniband::params::protocol}")
-notice("infiniband::params::port = ${infiniband::params::port}")
-notice("infiniband::params::packagename = ${infiniband::params::packagename}")
+notice("infiniband::params::packagelist = ${infiniband::params::packagelist}")
+notice("infiniband::params::grouppackagename = ${infiniband::params::grouppackagename}")
+notice("infiniband::params::modulelist = ${infiniband::params::modulelist}")
+notice("infiniband::params::extra_packages = ${infiniband::params::extra_packages}")
+notice("infiniband::params::openib_servicename = ${infiniband::params::openib_servicename}")
+notice("infiniband::params::openib_processname = ${infiniband::params::openib_processname}")
+notice("infiniband::params::sm_packagename = ${infiniband::params::sm_packagename}")
+notice("infiniband::params::sm_utilspackages = ${infiniband::params::sm_utilspackages}")
+notice("infiniband::params::sm_servicename = ${infiniband::params::sm_servicename}")
+notice("infiniband::params::sm_processname = ${infiniband::params::sm_processname}")
+notice("infiniband::params::hasstatus = ${infiniband::params::hasstatus}")
+notice("infiniband::params::hasrestart = ${infiniband::params::hasrestart}")
+notice("infiniband::params::sm_configfile = ${infiniband::params::sm_configfile}")
+notice("infiniband::params::sm_configfile_mode = ${infiniband::params::sm_configfile_mode}")
+notice("infiniband::params::sm_configfile_owner = ${infiniband::params::sm_configfile_owner}")
+notice("infiniband::params::sm_configfile_group = ${infiniband::params::sm_configfile_group}")
 
 #each($names) |$v| {
 #    $var = "infiniband::params::${v}"
