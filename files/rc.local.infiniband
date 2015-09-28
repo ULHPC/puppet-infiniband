@@ -1,0 +1,16 @@
+
+### Infiniband specific part ###
+# Add node description to sysfs
+IBSYSDIR="/sys/class/infiniband"
+if [ -d ${IBSYSDIR} ]; then
+        for hca in ${IBSYSDIR}/*
+        do
+                if [ -w ${hca}/node_desc ]; then
+                        echo -n "$(hostname | cut -f 1 -d .) HCA-$(basename $hca)" >> ${hca}/node_desc 2> /dev/null
+                fi
+        done
+fi
+
+chmod 666 /dev/infiniband/*
+
+
