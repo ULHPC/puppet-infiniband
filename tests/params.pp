@@ -15,7 +15,7 @@
 
 include 'infiniband::params'
 
-$names = ["ensure", "protocol", "port", "packagename"]
+$names = ['ensure', 'protocol', 'port', 'packagename']
 
 notice("infiniband::params::ensure = ${infiniband::params::ensure}")
 notice("infiniband::params::protocol = ${infiniband::params::protocol}")

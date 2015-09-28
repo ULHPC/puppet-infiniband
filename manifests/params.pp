@@ -1,7 +1,7 @@
-# File::      <tt>infiniband-params.pp</tt>
-# Author::    Sebastien Varrette (Sebastien.Varrette@uni.lu)
-# Copyright:: Copyright (c) 2011 Sebastien Varrette
-# License::   GPL v3
+# File::      <tt>params.pp</tt>
+# Author::    S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team (hpc-sysadmins@uni.lu)
+# Copyright:: Copyright (c) 2015 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team
+# License::   Gpl-3.0
 #
 # ------------------------------------------------------------------------------
 # = Class: infiniband::params
@@ -32,9 +32,9 @@ class infiniband::params {
     ###########################################
 
     # ensure the presence (or absence) of infiniband
-    $ensure = $infiniband_ensure ? {
+    $ensure = $::infiniband_ensure ? {
         ''      => 'present',
-        default => "${infiniband_ensure}"
+        default => $::infiniband_ensure
     }
 
     #### MODULE INTERNAL VARIABLES  #########
@@ -67,8 +67,8 @@ class infiniband::params {
     }
     $grouppackagename = $::operatingsystem ? {
         /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
-            '5'     => "OpenFabrics Enterprise Distribution",
-            default => "Infiniband Support"
+            '5'     => 'OpenFabrics Enterprise Distribution',
+            default => 'Infiniband Support'
         },
         default => ''
     }
@@ -140,7 +140,7 @@ class infiniband::params {
 
     $sm_configfile = $::operatingsystem ? {
         /(?i-mx:ubuntu|debian)/ => '/etc/opensm/opensm.conf',
-        default                 => "/etc/${$openib_servicename}/opensm.conf",
+        default                 => "/etc/${openib_servicename}/opensm.conf",
     }
 
     $sm_configfile_mode = $::operatingsystem ? {
