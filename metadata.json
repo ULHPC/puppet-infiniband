@@ -1,0 +1,47 @@
+{
+  "name": "ULHPC/infiniband",
+  "version": "0.1.0",
+  "author": "S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team",
+  "mail": "hpc-sysadmins@uni.lu",
+  "summary": "Install and configure infiniband",
+  "description": "Install and configure infiniband",
+  "license": "GPL-3.0",
+  "source": "https://github.com/ULHPC/puppet-infiniband",
+  "docs_project": "ulhpc-puppet-infiniband",
+  "project_page": "https://github.com/ULHPC/puppet-infiniband",
+  "issues_url": "https://github.com/ULHPC/puppet-infiniband/issues",
+  "forge_url": "https://forge.puppetlabs.com/ULHPC/infiniband",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">=4.2.2 <5.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "tags": [
+    "infiniband"
+  ],
+  "classes": [
+    "infiniband",
+    "infiniband::common",
+    "infiniband::common::debian",
+    "infiniband::common::redhat",
+    "infiniband::modules",
+    "infiniband::params",
+    "infiniband::subnetmanager",
+    "infiniband::subnetmanager::common",
+    "infiniband::subnetmanager::debian",
+    "infiniband::subnetmanager::redhat"
+  ],
+  "definitions": [
+
+  ]
+}
