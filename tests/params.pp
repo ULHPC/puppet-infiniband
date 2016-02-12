@@ -1,6 +1,6 @@
 # File::      <tt>params.pp</tt>
 # Author::    S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team (hpc-sysadmins@uni.lu)
-# Copyright:: Copyright (c) 2015 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team
+# Copyright:: Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team
 # License::   Gpl-3.0
 #
 # ------------------------------------------------------------------------------
@@ -15,7 +15,7 @@
 
 include 'infiniband::params'
 
-$names = ['ensure', 'packagelist', 'grouppackagename', 'modulelist', 'extra_packages', 'openib_servicename', 'openib_processname', 'sm_packagename', 'sm_utilspackages', 'sm_servicename', 'sm_processname', 'hasstatus', 'hasrestart', 'sm_configfile', 'sm_configfile_mode', 'sm_configfile_owner', 'sm_configfile_group']
+$names = ["ensure", "packagelist", "grouppackagename", "modulelist", "extra_packages", "openib_servicename", "openib_processname", "sm_packagename", "sm_utilspackages", "sm_servicename", "sm_processname", "hasstatus", "hasrestart", "sm_configfile", "sm_configfile_mode", "sm_configfile_owner", "sm_configfile_group"]
 
 notice("infiniband::params::ensure = ${infiniband::params::ensure}")
 notice("infiniband::params::packagelist = ${infiniband::params::packagelist}")
