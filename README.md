@@ -4,12 +4,12 @@
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/infiniband.svg)](https://forge.puppetlabs.com/ULHPC/infiniband)
 [![License](http://img.shields.io/:license-GPL3.0-blue.svg)](LICENSE)
-![Supported Platforms](http://img.shields.io/badge/platform-debian-lightgrey.svg)
+![Supported Platforms](http://img.shields.io/badge/platform-debian|centos-lightgrey.svg)
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-infiniband/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-infiniband/?badge=latest)
 
 Install and configure infiniband
 
-      Copyright (c) 2015 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
+      Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
       
 
 | [Project Page](https://github.com/ULHPC/puppet-infiniband) | [Sources](https://github.com/ULHPC/puppet-infiniband) | [Documentation](https://ulhpc-puppet-infiniband.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-infiniband/issues) |
@@ -21,6 +21,16 @@ Install and configure infiniband.
 This module implements the following elements: 
 
 * __Puppet classes__:
+    - `infiniband` 
+    - `infiniband::common` 
+    - `infiniband::common::debian` 
+    - `infiniband::common::redhat` 
+    - `infiniband::modules` 
+    - `infiniband::params` 
+    - `infiniband::subnetmanager` 
+    - `infiniband::subnetmanager::common` 
+    - `infiniband::subnetmanager::debian` 
+    - `infiniband::subnetmanager::redhat` 
 
 * __Puppet definitions__: 
 
@@ -35,6 +45,8 @@ See `docs/contributing.md` for more details on the steps you shall follow to hav
 See [`metadata.json`](metadata.json). In particular, this module depends on 
 
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
+* [ULHPC/kernel](https://forge.puppetlabs.com/ULHPC/kernel)
+* [ULHPC/rclocal](https://forge.puppetlabs.com/ULHPC/rclocal)
 
 ## Overview and Usage
 
@@ -51,6 +63,18 @@ Use it as follows:
 
 See also [`tests/init.pp`](tests/init.pp)
 
+### Class `infiniband::modules`
+
+See [`tests/modules.pp`](tests/modules.pp)
+### Class `infiniband::subnetmanager`
+
+See [`tests/subnetmanager.pp`](tests/subnetmanager.pp)
+### Class `infiniband::subnetmanager::debian`
+
+See [`tests/subnetmanager/debian.pp`](tests/subnetmanager/debian.pp)
+### Class `infiniband::subnetmanager::redhat`
+
+See [`tests/subnetmanager/redhat.pp`](tests/subnetmanager/redhat.pp)
 
 
 ## Librarian-Puppet / R10K Setup
