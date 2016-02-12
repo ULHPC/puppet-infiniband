@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/infiniband",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team",
   "mail": "hpc-sysadmins@uni.lu",
   "summary": "Install and configure infiniband",
@@ -15,11 +15,26 @@
     {
       "name": "puppetlabs-stdlib",
       "version_requirement": ">=4.2.2 <5.0.0"
+    },
+    {
+      "name": "ULHPC/kernel",
+      "version_requirement": "0.x"
+    },
+    {
+      "name": "ULHPC/rclocal",
+      "version_requirement": "0.x"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Centos",
       "operatingsystemrelease": [
         "6",
         "7"
