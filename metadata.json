@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/infiniband",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "UL HPC Devops Team aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl and C. Parisot ",
   "mail": "hpc-sysadmins@uni.lu",
   "summary": "Install and configure infiniband",
