@@ -1,5 +1,5 @@
 # File::      <tt>init.pp</tt>
-# Author::    S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team (hpc-sysadmins@uni.lu)
+# Author::    UL HPC DevOps Team (hpc-sysadmins@uni.lu)
 # Copyright:: Copyright (c) 2015 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team
 # License::   Gpl-3.0
 #
@@ -40,7 +40,8 @@
 # [Remember: No empty lines between comments and class definition]
 #
 class infiniband(
-    $ensure = $infiniband::params::ensure
+    $ensure     = $infiniband::params::ensure,
+    $modulelist = $infiniband::params::modulelist
 )
 inherits infiniband::params
 {
@@ -58,6 +59,3 @@ inherits infiniband::params
         }
     }
 }
-
-
-

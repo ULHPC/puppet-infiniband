@@ -32,10 +32,7 @@ class infiniband::params {
     ###########################################
 
     # ensure the presence (or absence) of infiniband
-    $ensure = $::infiniband_ensure ? {
-        ''      => 'present',
-        default => $::infiniband_ensure
-    }
+    $ensure = 'present'
 
     #### MODULE INTERNAL VARIABLES  #########
     # (Modify to adapt to unsupported OSes)
@@ -82,6 +79,10 @@ class infiniband::params {
                                     'rdma_cm',
                                     'rdma_ucm',
                                     ],
+        /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
+          '7'     => [ 'mlx5_ib' ]
+          default => []
+        },
         default => []
     }
 
@@ -157,4 +158,3 @@ class infiniband::params {
 
 
 }
-
