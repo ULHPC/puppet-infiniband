@@ -80,7 +80,7 @@ class infiniband::params {
                                     'rdma_ucm',
                                     ],
         /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
-          '7'     => [ 'mlx5_ib' ]
+          '7'     => [ 'mlx5_ib' ],
           default => []
         },
         default => []
