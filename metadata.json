@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/infiniband",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "author": "UL HPC Devops Team aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl and C. Parisot ",
   "mail": "hpc-sysadmins@uni.lu",
   "summary": "Install and configure infiniband",
@@ -19,6 +19,10 @@
     {
       "name": "ULHPC/kernel",
       "version_requirement": "0.x"
+    },
+    {
+      "name": "puppet/yum",
+      "version_requirement": ">=1.0.0 < 2.0.0"
     },
     {
       "name": "ULHPC/rclocal",
