@@ -9,20 +9,24 @@
 # Specialization class for Redhat systems
 class infiniband::common::redhat inherits infiniband::common {
 
+  yum::group { $infiniband::params::grouppackagename:
+    ensure  => present,
+    timeout => 600,
+  }
     # install the required packages
-    exec { 'Install IB packages':
-        command => "yum -y groupinstall '${infiniband::params::grouppackagename}'",
-        path    => '/sbin:/usr/bin:/usr/sbin:/bin',
-        user    => 'root',
-        group   => 'root'
-    }
+    #exec { 'Install IB packages':
+    #    command => "yum -y groupinstall '${infiniband::params::grouppackagename}'",
+    #    path    => '/sbin:/usr/bin:/usr/sbin:/bin',
+    #    user    => 'root',
+    #    group   => 'root'
+    #}
 
     # install the extra packages
     package { $infiniband::params::extra_packages :
         ensure  => $infiniband::ensure,
-        require => Exec['Install IB packages'],
+        require => Yum::Group[$infiniband::params::grouppackagename]  # Exec['Install IB packages'],
     }
-    
+
     service { 'openibd':
         ensure     => running,
         name       => $infiniband::params::openib_servicename,
@@ -30,6 +34,6 @@ class infiniband::common::redhat inherits infiniband::common {
         hasrestart => $infiniband::params::hasrestart,
         pattern    => $infiniband::params::openib_processname,
         hasstatus  => $infiniband::params::hasstatus,
-        require    => Exec['Install IB packages'],
+        require    => Yum::Group[$infiniband::params::grouppackagename]  # Exec['Install IB packages'],
     }
 }

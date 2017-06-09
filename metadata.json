@@ -21,6 +21,10 @@
       "version_requirement": "0.x"
     },
     {
+      "name": "puppet/yum",
+      "version_requirement": ">=1.0.0 < 2.0.0"
+    },
+    {
       "name": "ULHPC/rclocal",
       "version_requirement": "0.x"
     }
