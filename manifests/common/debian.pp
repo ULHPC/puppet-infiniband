@@ -17,15 +17,15 @@ class infiniband::common::debian inherits infiniband::common {
     package { $infiniband::params::extra_packages :
         ensure  => $infiniband::ensure,
     }
-  
+
     # Bad packaging under Debian ;) 
     # Add the rc.local file such that the hostname are currectly displayed when
     # the IB commands are used (such as ibhosts which list the IB cards)
-    require rclocal
+    require ::rclocal
     rclocal::update { 'infiniband':
         ensure => $infiniband::ensure,
         source => 'puppet:///modules/infiniband/rc.local.infiniband',
-        order  => 50
+        order  => 50,
     }
 
 }

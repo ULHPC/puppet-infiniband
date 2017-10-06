@@ -10,7 +10,7 @@
 class infiniband::subnetmanager::debian inherits infiniband::subnetmanager::common {
 
     package { $infiniband::params::sm_utilspackages:
-        ensure => $infiniband::ensure
+        ensure => $infiniband::ensure,
     }
 
 }

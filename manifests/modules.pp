@@ -13,7 +13,7 @@
 class infiniband::modules {
 
     # Load the variables used in this module. Check the params.pp file
-    require infiniband::params
+    require ::infiniband::params
 
     # install the modules
     kernel::module { $infiniband::modulelist :
