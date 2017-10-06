@@ -4,12 +4,12 @@
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/ULHPC/infiniband.svg)](https://forge.puppetlabs.com/ULHPC/infiniband)
 [![License](http://img.shields.io/:license-GPL3.0-blue.svg)](LICENSE)
-![Supported Platforms](http://img.shields.io/badge/platform-debian|centos-lightgrey.svg)
+![Supported Platforms](http://img.shields.io/badge/platform-debian|centos|redhat-lightgrey.svg)
 [![Documentation Status](https://readthedocs.org/projects/ulhpc-puppet-infiniband/badge/?version=latest)](https://readthedocs.org/projects/ulhpc-puppet-infiniband/?badge=latest)
 
 Install and configure infiniband
 
-      Copyright (c) 2016 S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl aka. UL HPC Management Team <hpc-sysadmins@uni.lu>
+      Copyright (c) 2017 UL HPC Devops Team aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl and C. Parisot  <hpc-sysadmins@uni.lu>
       
 
 | [Project Page](https://github.com/ULHPC/puppet-infiniband) | [Sources](https://github.com/ULHPC/puppet-infiniband) | [Documentation](https://ulhpc-puppet-infiniband.readthedocs.org/en/latest/) | [Issues](https://github.com/ULHPC/puppet-infiniband/issues) |
@@ -46,6 +46,7 @@ See [`metadata.json`](metadata.json). In particular, this module depends on
 
 * [puppetlabs/stdlib](https://forge.puppetlabs.com/puppetlabs/stdlib)
 * [ULHPC/kernel](https://forge.puppetlabs.com/ULHPC/kernel)
+* [puppet/yum](https://forge.puppetlabs.com/puppet/yum)
 * [ULHPC/rclocal](https://forge.puppetlabs.com/ULHPC/rclocal)
 
 ## Overview and Usage
