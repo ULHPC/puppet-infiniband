@@ -15,7 +15,7 @@
 
 include 'infiniband::params'
 
-$names = ["ensure", "packagelist", "grouppackagename", "modulelist", "extra_packages", "openib_servicename", "openib_processname", "sm_packagename", "sm_utilspackages", "sm_servicename", "sm_processname", "hasstatus", "hasrestart", "sm_configfile", "sm_configfile_mode", "sm_configfile_owner", "sm_configfile_group"]
+$names = ['ensure', 'packagelist', 'grouppackagename', 'modulelist', 'extra_packages', 'openib_servicename', 'openib_processname', 'sm_packagename', 'sm_utilspackages', 'sm_servicename', 'sm_processname', 'hasstatus', 'hasrestart', 'sm_configfile', 'sm_configfile_mode', 'sm_configfile_owner', 'sm_configfile_group']
 
 notice("infiniband::params::ensure = ${infiniband::params::ensure}")
 notice("infiniband::params::packagelist = ${infiniband::params::packagelist}")

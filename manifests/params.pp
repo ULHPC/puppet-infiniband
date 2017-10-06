@@ -89,7 +89,8 @@ class infiniband::params {
     $extra_packages = $::operatingsystem ? {
         /(?i-mx:centos|fedora|redhat)/ => $::lsbmajdistrelease ? {
             '5'     => [ 'infiniband-diags', 'perftest', ],
-            default => [ 'infiniband-diags', 'perftest', 'mstflint' ],
+            '6'     => [ 'infiniband-diags', 'perftest', 'mstflint' ],
+            default => [ 'infiniband-diags', 'perftest', 'mstflint', 'rdma-core-devel' ],
         },
         default => [ 'infiniband-diags' ]
     }
