@@ -13,7 +13,7 @@
 class infiniband::subnetmanager::common {
 
     # Load the variables used in this module. Check the infiniband-params.pp file
-    require infiniband::params
+    require ::infiniband::params
 
     package { 'opensm':
         ensure => $infiniband::ensure
@@ -26,14 +26,14 @@ class infiniband::subnetmanager::common {
         require => Package['opensm'],
         unless  => "test -f ${infiniband::params::sm_configfile}",
     }
-    
+
     file { $infiniband::params::sm_configfile:
         ensure  => $infiniband::ensure,
         owner   => $infiniband::params::sm_configfile_owner,
         group   => $infiniband::params::sm_configfile_group,
         mode    => $infiniband::params::sm_configfile_mode,
         notify  => Service['opensm'],
-        require => Exec["create ${infiniband::params::sm_configfile}"]
+        require => Exec["create ${infiniband::params::sm_configfile}"],
     }
 
     service { 'opensm':
