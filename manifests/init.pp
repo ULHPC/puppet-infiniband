@@ -53,8 +53,8 @@ inherits infiniband::params
     }
 
     case $::operatingsystem {
-        'debian', 'ubuntu':         { include ::infiniband::common::debian }
-        'redhat', 'fedora', 'centos': { include ::infiniband::common::redhat }
+        'debian', 'ubuntu':         { include infiniband::common::debian }
+        'redhat', 'fedora', 'centos': { include infiniband::common::redhat }
         default: {
             fail("Module ${module_name} is not supported on ${::operatingsystem}")
         }

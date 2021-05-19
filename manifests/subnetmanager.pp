@@ -59,8 +59,8 @@ inherits infiniband::params
     }
 
     case $::operatingsystem {
-        'debian', 'ubuntu':         { include ::infiniband::subnetmanager::debian }
-        'redhat', 'fedora', 'centos': { include ::infiniband::subnetmanager::redhat }
+        'debian', 'ubuntu':         { include infiniband::subnetmanager::debian }
+        'redhat', 'fedora', 'centos': { include infiniband::subnetmanager::redhat }
         default: {
             fail("Module ${module_name} is not supported on ${::operatingsystem}")
         }
