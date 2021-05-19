@@ -330,7 +330,7 @@ GEM
       thor
     little-plugger (1.1.4)
     locale (2.1.2)
-    logger (1.2.8)
+    logger (1.4.3)
     logging (2.2.2)
       little-plugger (~> 1.1)
       multi_json (~> 1.10)
@@ -347,7 +347,7 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.5.1)
     minigit (0.0.4)
     minitar (0.6.1)
     minitest (5.10.3)
@@ -361,8 +361,9 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
     net-telnet (0.1.1)
-    nokogiri (1.8.1)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.11.4)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     oga (2.11)
       ast
       ruby-ll (~> 2.1)
@@ -406,6 +407,7 @@ GEM
     pusher-client (0.6.2)
       json
       websocket (~> 1.0)
+    racc (1.5.2)
     rainbow (2.2.2)
       rake
     rake (10.5.0)
