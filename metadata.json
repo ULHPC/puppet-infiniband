@@ -1,6 +1,6 @@
 {
   "name": "ULHPC/infiniband",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "UL HPC Devops Team aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl and C. Parisot ",
   "summary": "Install and configure infiniband",
   "license": "GPL-3.0",
@@ -8,10 +8,22 @@
   "project_page": "https://github.com/ULHPC/puppet-infiniband",
   "issues_url": "https://github.com/ULHPC/puppet-infiniband/issues",
   "dependencies": [
-    {"name":"puppetlabs-stdlib","version_requirement":">=4.2.2 <5.0.0"},
-    {"name":"ULHPC/kernel","version_requirement":"0.x"},
-    {"name":"puppet/yum","version_requirement":">=1.0.0 < 2.0.0"},
-    {"name":"ULHPC/rclocal","version_requirement":"0.x"}
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">=4.2.2 <5.0.0"
+    },
+    {
+      "name": "ULHPC/kernel",
+      "version_requirement": "0.x"
+    },
+    {
+      "name": "puppet/yum",
+      "version_requirement": ">=1.0.0 < 2.0.0"
+    },
+    {
+      "name": "ULHPC/rclocal",
+      "version_requirement": "0.x"
+    }
   ],
   "data_provider": null,
   "mail": "hpc-sysadmins@uni.lu",
@@ -57,6 +69,6 @@
     "infiniband::subnetmanager::redhat"
   ],
   "definitions": [
-  
+
   ]
 }
