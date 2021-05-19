@@ -13,13 +13,13 @@
 class infiniband::common {
 
     # Load the variables used in this module. Check the params.pp file
-    require ::infiniband::params
+    require infiniband::params
 
     ### Add (or remove) the modules at the end (create a stage to be run at the
     ### end for this purpose)
     stage { 'infiniband_last':  require => Stage['main'] }
     #stage { 'sysadmin_first': before  => Stage['main'] }
-    class { '::infiniband::modules':
+    class { 'infiniband::modules':
     stage => 'infiniband_last',
   }
 

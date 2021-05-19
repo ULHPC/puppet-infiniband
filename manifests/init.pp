@@ -40,8 +40,9 @@
 # [Remember: No empty lines between comments and class definition]
 #
 class infiniband(
-    $ensure     = $infiniband::params::ensure,
-    $modulelist = $infiniband::params::modulelist
+    $ensure             = $infiniband::params::ensure,
+    $modulelist         = $infiniband::params::modulelist,
+    $openib_servicename = $infiniband::params::openib_servicename
 )
 inherits infiniband::params
 {
@@ -52,8 +53,8 @@ inherits infiniband::params
     }
 
     case $::operatingsystem {
-        'debian', 'ubuntu':         { include ::infiniband::common::debian }
-        'redhat', 'fedora', 'centos': { include ::infiniband::common::redhat }
+        'debian', 'ubuntu':         { include infiniband::common::debian }
+        'redhat', 'fedora', 'centos': { include infiniband::common::redhat }
         default: {
             fail("Module ${module_name} is not supported on ${::operatingsystem}")
         }

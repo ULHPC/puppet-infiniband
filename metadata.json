@@ -1,16 +1,12 @@
 {
   "name": "ULHPC/infiniband",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "UL HPC Devops Team aka. S. Varrette, H. Cartiaux, V. Plugaru, S. Diehl and C. Parisot ",
-  "mail": "hpc-sysadmins@uni.lu",
   "summary": "Install and configure infiniband",
-  "description": "Install and configure infiniband",
   "license": "GPL-3.0",
   "source": "https://github.com/ULHPC/puppet-infiniband",
-  "docs_project": "ulhpc-puppet-infiniband",
   "project_page": "https://github.com/ULHPC/puppet-infiniband",
   "issues_url": "https://github.com/ULHPC/puppet-infiniband/issues",
-  "forge_url": "https://forge.puppetlabs.com/ULHPC/infiniband",
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
@@ -29,6 +25,11 @@
       "version_requirement": "0.x"
     }
   ],
+  "data_provider": null,
+  "mail": "hpc-sysadmins@uni.lu",
+  "description": "Install and configure infiniband",
+  "docs_project": "ulhpc-puppet-infiniband",
+  "forge_url": "https://forge.puppetlabs.com/ULHPC/infiniband",
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",

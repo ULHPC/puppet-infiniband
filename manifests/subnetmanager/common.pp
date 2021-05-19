@@ -13,7 +13,7 @@
 class infiniband::subnetmanager::common {
 
     # Load the variables used in this module. Check the infiniband-params.pp file
-    require ::infiniband::params
+    require infiniband::params
 
     package { 'opensm':
         ensure => $infiniband::ensure
