@@ -40,8 +40,9 @@
 # [Remember: No empty lines between comments and class definition]
 #
 class infiniband(
-    $ensure     = $infiniband::params::ensure,
-    $modulelist = $infiniband::params::modulelist
+    $ensure             = $infiniband::params::ensure,
+    $modulelist         = $infiniband::params::modulelist,
+    $openib_servicename = $infiniband::params::openib_servicename
 )
 inherits infiniband::params
 {

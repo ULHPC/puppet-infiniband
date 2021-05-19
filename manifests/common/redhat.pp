@@ -29,7 +29,7 @@ class infiniband::common::redhat inherits infiniband::common {
 
     service { 'openibd':
         ensure     => running,
-        name       => $infiniband::params::openib_servicename,
+        name       => $infiniband::openib_servicename,
         enable     => true,
         hasrestart => $infiniband::params::hasrestart,
         pattern    => $infiniband::params::openib_processname,
